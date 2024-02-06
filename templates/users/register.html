@@ -1,0 +1,59 @@
+{% extends 'users/_base.html' %}
+{% load static %}
+{% block title %}Register{% endblock title %}
+{% block content %}
+{% load crispy_forms_tags%}
+<div class="login-header">
+    <div class="brand">
+        <div class="">
+            <img src="{% static 'dashboard/images/logo.png' %}" style="width: 180px; height:auto;">
+        </div>
+        <small>Home of Kenya's Authentic Photography</small>
+    </div>
+</div>
+<div class="login-content">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col">
+                {{ form.email|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="col">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                {{ form.user_type|as_crispy_field }}
+            </div>
+            <div class="col">
+                {{ form.phone_number|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                {{ form.password1|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                {{ form.password2|as_crispy_field }}
+            </div>
+        </div>    
+        <div class="login-buttons">
+            <button type="submit" class="btn btn-warning btn-block btn-lg">Register</button>
+        </div>
+        <div class="m-t-20 m-b-40 p-b-40 text-inverse">
+           Already have an account? click<a class="text-warning" href="{% url 'login' %}"style="color: #f39e19!!important;"> here</a> to login.
+        </div>
+        <p class="text-center text-grey-darker">
+            © Picha Safari All Right Reserved 2023
+        </p>
+    </form>
+</div>
+{% endblock content %}

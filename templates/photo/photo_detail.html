@@ -1,0 +1,14 @@
+{% extends 'dashboard/_base.html' %}
+{% block title %}Photo Details{% endblock title %}
+{% block navbarbrand %}Photo Details{% endblock %}
+{% block content %}
+<div class="">
+    <a
+    class="btn btn-outline-secondary"
+    href="{% url 'photo_list' %}"
+    > 
+        &larr; Back to Photos
+    </a>
+    {{photo.created_at}}
+</div>
+{% endblock content %}

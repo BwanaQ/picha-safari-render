@@ -1,0 +1,98 @@
+{% extends 'cart/_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Checkout{% endblock title %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            alert("{{ message }}")
+        </script>
+    {% endfor %}
+{% endif %}
+
+<div class="container-fluid">
+    <div class="text-center">
+        <div id="unpaid">
+            <h3>Pay KES {{summary.cart.final_price}} for cart # {{summary.cart.id}}</h3>
+        </div>
+        <div id="paid" style="display:none;">
+            <h3 >Payment of KES {{summary.cart.final_price}} Was Successful</h3>
+            <p>Thank You!</p>
+        </div>
+    </div>
+
+   <form id="myForm" action="{% url 'final-payment' %}" method="post">
+        {% csrf_token %}
+        {{ summary.form | crispy }}
+        <label>Mobile :</label>
+        <input style="padding: 2px" type="number" name="mobile" id="mobile" value="{{ summary.mobile }}" placeholder="254...">
+        <button  class="btn" type="submit" id="submit" value="submit">Make Payment
+                </button>
+    </form>
+    
+    	<!-- Preloader -->
+	<div id="processing" class="preloader" style = "display:none">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+        <div id="processing" style="margin-top: 20px">
+            Processing...
+            <!-- your existing dismiss button -->
+        </div>
+	</div>
+	<!-- End Preloader -->
+    <script>
+        const submitBtn = document.getElementById("submit");
+        const processingBtn = document.getElementById("processing");
+        const paidView = document.getElementById("paid");
+        const unpaidView = document.getElementById("unpaid");
+        const processingDialog = document.getElementById("processing-dialog");
+        const dismissBtn = document.getElementById("dismiss-btn");
+        const myForm = document.getElementById("myForm");
+
+        myForm.addEventListener("submit", function (event) {
+            window.alert("You will receive an M-pesa prompt shortly");
+            event.preventDefault();
+            // Display the processing dialog
+            processingDialog.style.display = "block";
+            // Disable the submit button to prevent multiple form submissions
+            submitBtn.disabled = true;
+
+            // Send the form data using AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', myForm.action, true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 200 && xhr.responseText) {
+                    // Update the processing message and re-enable the submit button based on the response
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        processingDialog.querySelector("div").textContent = "Payment Successful!";
+                        submitBtn.disabled = false;
+                        processingBtn.remove();
+                        myForm.remove();
+                        paidView.style.display = "block";
+                        unpaidView.style.display = "none";
+                        dismissBtn.click();
+                    } else {
+                        processingDialog.querySelector("div").textContent = "Payment was unsuccessful.";
+                        submitBtn.disabled = false;
+                        processingBtn.remove();
+                    }
+                }
+            };
+            xhr.send(new FormData(myForm));
+        });
+
+        dismissBtn.addEventListener("click", function () {
+            // Hide the processing dialog
+            processingDialog.style.display = "none";
+        });
+    </script>    
+</div>
+
+{% endblock content%}
+

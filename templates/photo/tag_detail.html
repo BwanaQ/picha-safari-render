@@ -1,0 +1,14 @@
+{% extends 'dashboard/_base.html' %}
+{% block title %}Tag Details{% endblock title %}
+{% block navbarbrand %}Tag Details{% endblock %}
+{% block content %}
+<div class="">
+    <a
+    class="btn btn-outline-secondary"
+    href="{% url 'tag_list' %}"
+    > 
+        &larr; Back to Tags
+    </a>
+    {{category.name}}
+</div>
+{% endblock content %}

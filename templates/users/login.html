@@ -1,0 +1,30 @@
+{% extends 'users/_base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+{% load crispy_forms_tags%}
+<div class="login-header">
+    <div class="brand">
+        <div class="">
+            <img src="{% static 'dashboard/images/logo.png' %}" style="width: 180px; height:auto;">
+        </div>
+        <small>Home of Kenya's Authentic Photography</small>
+    </div>
+</div>
+<div class="login-content">
+    <form method="post">
+        {% csrf_token %}
+            {{ form|crispy }}
+        <div class="login-buttons">
+            <button type="submit" class="btn btn-warning btn-block btn-lg">Login</button>
+        </div>
+        <div class="m-t-20 m-b-40 p-b-40 text-inverse">
+            Not a member yet? click<a class="text-warning" href="{% url 'register' %}"style="color: #f39e19!!important;"> here</a> to register.
+        </div>
+        <p class="text-center text-grey-darker">
+            © Picha Safari All Right Reserved 2023
+        </p>
+    </form>
+</div>
+
+{% endblock content %}

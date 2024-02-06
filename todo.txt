@@ -1,0 +1,18 @@
+source views    add1. Create core project [x]
+2. create album, photo Apps [x]
+3. create custom user model - 2 User types Enthusiast / creative [x]
+4. create photo model [x]
+6. Restrict viewing of albums and Photos from users who did not create them in dashboard views [x]
+7. Create Cart App [x]
+8. Finalise on CRUD [ ]
+9. create Cart and CartItem Models [x]
+10. Add Listing view. [x]
+11. Template front end [ ]
+12. List all photos in cart App [x]
+13. Add +cart button [x]
+14. Add jscript functionality for add to cart function[x]
+15. Add -cart button [ ]
+16. Add jscript functionality for remove from cart function [x]
+17. Change list View in backend to datatable [!!] 
+
+
