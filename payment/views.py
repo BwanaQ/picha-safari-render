@@ -15,7 +15,7 @@ class SendSTKPushView(views.APIView):
 class MpesaCallbackView(views.APIView):
     def post(self, request, format=None):
         body = request.data
-
+        print(f"BODY---------------->{body}")
         if body:
             mpesa = MpesaResponseBody.objects.create(body=body)
 

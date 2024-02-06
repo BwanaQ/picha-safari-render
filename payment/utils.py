@@ -60,7 +60,7 @@ class MpesaGateWay:
         print(f" SHORTCODE--------->{self.business_shortcode}")
         print(f"CONSUMER KEY------->{self.consumer_key}")
         print(f"CONSUMER SECRET---->{self.consumer_secret}")
-        print(f"ACCESS TOKEN------->{self.access_token_url}")
+        print(f"ACCESS TOKEN URL------->{self.access_token_url}")
         print(f"PASSWORD----------->{self.password}")
         print(f"CHECKOUT URL------->{self.checkout_url}")
 
