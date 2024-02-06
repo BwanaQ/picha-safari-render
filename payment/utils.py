@@ -47,6 +47,9 @@ class MpesaGateWay:
 
 
     def __init__(self):
+        # Initialize headers attribute to None
+        self.headers = None
+        
         self.business_shortcode = config("MPESA_SHORTCODE")
         self.consumer_key = config("MPESA_CONSUMER_KEY")
         self.consumer_secret = config("MPESA_CONSUMER_SECRET")
@@ -66,15 +69,13 @@ class MpesaGateWay:
     def getAccessToken(self):
         try:
             res = requests.get(self.access_token_url, auth=HTTPBasicAuth(self.consumer_key, self.consumer_secret))
-
-        except Exception as err:
-            logging.error("Error {}".format(err))
-
-        else:
             token = res.json()["access_token"]
             print(token)
             self.headers = {"Authorization": "Bearer %s" % token}
             return token
+        except Exception as err:
+            logging.error("Error {}".format(err))
+            return None
 
     class Decorators:
         @staticmethod
