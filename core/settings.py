@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'rest_framework',
-    'mpesa',
     # My Apps
     'users',
     'dashboard',
