@@ -57,8 +57,17 @@ class MpesaGateWay:
         self.password = self.generate_password()
         self.checkout_url = config("CHECKOUT_URL")
 
+        print(f" SHORTCODE--------->{self.business_shortcode}")
+        print(f"CONSUMER KEY------->{self.consumer_key}")
+        print(f"CONSUMER SECRET---->{self.consumer_secret}")
+        print(f"ACCESS TOKEN------->{self.access_token_url}")
+        print(f"PASSWORD----------->{self.password}")
+        print(f"CHECKOUT URL------->{self.checkout_url}")
+
+
         try:
             self.access_token = self.getAccessToken()
+            print(f"ACCESS TOKEN--->{self.access_token}")
             if self.access_token is None:
                 raise Exception("Request for access token failed.")
         except Exception as e:
@@ -69,9 +78,12 @@ class MpesaGateWay:
     def getAccessToken(self):
         try:
             res = requests.get(self.access_token_url, auth=HTTPBasicAuth(self.consumer_key, self.consumer_secret))
+            print(f"RES ------------->{res}")
             token = res.json()["access_token"]
-            print(token)
+            print(f"TOKEN------------>{token}")
+
             self.headers = {"Authorization": "Bearer %s" % token}
+            print(f"HEADERS---------->{self.headers}")
             return token
         except Exception as err:
             logging.error("Error {}".format(err))
@@ -117,7 +129,10 @@ class MpesaGateWay:
 
         try:
             res = requests.post(self.checkout_url, json=request_data, headers=self.headers, timeout=30)
+            print(f"RES ------------->{res}")
+
             response = mpesa_response(res)
+            print(f"RESPONSE ------------->{response}")
 
             return response
         except requests.exceptions.ConnectionError:

@@ -20,7 +20,7 @@ class MpesaCallbackView(views.APIView):
             mpesa = MpesaResponseBody.objects.create(body=body)
 
             mpesa_body = mpesa.body
-
+            print(f"MPESA BODY-------------->{mpesa_body}")
             if mpesa_body['stkCallback']['ResultCode'] == 0:
                 transaction = Transaction.objects.create(
                     amount=mpesa_body['Body']['stkCallback']['CallbackMetadata']['Item'][0]["Value"],
