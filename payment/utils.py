@@ -72,6 +72,7 @@ class MpesaGateWay:
 
         else:
             token = res.json()["access_token"]
+            print(token)
             self.headers = {"Authorization": "Bearer %s" % token}
             return token
 
