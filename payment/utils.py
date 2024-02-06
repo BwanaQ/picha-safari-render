@@ -108,7 +108,7 @@ class MpesaGateWay:
             "PartyA": phonenumber,
             "PartyB": self.business_shortcode,
             "PhoneNumber": phonenumber,
-            "CallBackURL": callback_url,
+            "CallBackURL": "https://https://pichasafari.onrender.com/payment/callback/",
             "AccountReference": "Picha Safari",
             "TransactionDesc": "Cart Payment",
         }
