@@ -9,6 +9,7 @@ class SendSTKPushView(views.APIView):
         serializer = SendSTKPushSerializer(data=request.data)
         if serializer.is_valid():
             res = serializer.save()
+            print(f"RES---------------->{res}")
             return response.Response(res, status=status.HTTP_200_OK)
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
