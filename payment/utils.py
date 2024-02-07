@@ -124,7 +124,7 @@ class MpesaGateWay:
             "PhoneNumber": phonenumber,
             "CallBackURL": callback_url,
             "AccountReference": "Picha Safari",
-            "TransactionDesc": "Cart Payment",
+            "TransactionDesc": "Cart Payment"
         }
 
         try:
